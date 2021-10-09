@@ -17,10 +17,6 @@ public class Hospital {
 	public boolean matchPincode(String pinCode){
 		return pinCode.equals(this.pincode);
 	}
-	//getter for name
-	public String getName(){
-		return this.name;
-	}
 	//sees if any of the slots contains the vaccine
 	public boolean availableVaccine(String vname){
 		for(Slot s: slots){
@@ -33,9 +29,43 @@ public class Hospital {
 		slots.add(s1);
 		//System.out.println();
 	}
-	public void printSlots(){
-		//
+	public void printAllSlots(){
+		int i = 0;
+		for(Slot s: slots){
+			System.out.println(i+"->"+s);
+			i++;
+		}
 	}
+	//true if slots available, false if not
+	public boolean printSlotsWithConditions(String vname, int dueDate, int doses){
+		int i = 0;
+		boolean check = false;
+		for(Slot s: slots){
+			if(s.matchPatientNeeds(vname,dueDate,doses) == true){
+				System.out.println(i+"->"+s);
+				check = true;
+			}
+		}
+		if(check == false){
+			System.out.println("No Slots available");
+			return false;
+		}
+		return true;
+	}
+
+	public boolean vaccinatePatient(Citizen c, int slotIndex){
+		if((slotIndex < 0) || (slotIndex >= slots.size())){
+			System.out.println("Invalid slot entered");
+			return false;
+		}
+		int val = slots.get(slotIndex).useVaccine();
+		c.getVaccinated(slots.get(slotIndex).getDay());
+		if(val == 0){
+			slots.remove(slotIndex);
+		}
+		return true;
+	}
+
 	public String toString(){
 		return (id) + " " + this.name;
 	}

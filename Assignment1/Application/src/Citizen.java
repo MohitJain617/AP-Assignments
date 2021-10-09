@@ -14,6 +14,20 @@ public class Citizen {
 		doses = 0;
 		dueDate = 0;
 	}
+	//getters
+	public String getName(){
+		return this.name;
+	}
+	public int getDueDate(){
+		return this.dueDate;
+	}
+	public int getDoses(){
+		return this.doses;
+	}
+	public String getVaccineName(){
+		return this.vaccine.getName();
+	}
+
 	public void printStatus(){
 		if(doses == 0){
 			System.out.println("Registered");
@@ -28,7 +42,10 @@ public class Citizen {
 			System.out.println("Number of doses given: " + this.doses);
 		}
 	}
-	public void getVaccinated(){}
+	public void getVaccinated(int date){
+		doses++;
+		dueDate = date+vaccine.getGap();
+	}
 	public String toString(){
 		return "Citizen name: " + name + ", Age:" + age + ", Unique ID: " + id;
 	}

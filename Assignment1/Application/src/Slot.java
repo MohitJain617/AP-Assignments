@@ -7,9 +7,22 @@ public class Slot {
 		this.quantity = quantity;
 		this.vaccine = vaccine;
 	}
+	public int getDay(){
+		return this.day_no;
+	}
+
 	public boolean matchVaccine(String vname){
 		return this.vaccine.isEqual(vname);
 	}
+	//takes in vaccine name, due date and doses
+	public boolean matchPatientNeeds(String vname, int dueDate, int doses){
+		return ((vaccine.isEqual(vname)) && (dueDate <= day_no) && (doses < vaccine.getDoses()));
+	}
+	public int useVaccine(){
+		this.quantity--;
+		return this.quantity;
+	}
+
 	public String toString(){
 		return "Day: "+day_no+", Available Quantity "+quantity+", Vaccine: "+vaccine.getName();
 	}

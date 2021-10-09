@@ -22,7 +22,6 @@ public class App {
         if(doses != 1){
             System.out.print("Gap between Doses: ");
             gap = scn.nextInt();
-            scn.next(); //to eat trailing new line
         }
 
         for(Vaccine v: vaccines){
@@ -53,7 +52,10 @@ public class App {
         String name = scn.next();
         System.out.print("Age: ");
         int age = scn.nextInt();
-        scn.next(); //eat trailing new line
+        if(age < 18){
+            System.out.println("Underage for vaccination");
+            return;
+        }
         System.out.print("Unique ID: ");
         String uniqueId = scn.next();
 
@@ -111,16 +113,16 @@ public class App {
         System.out.println("3. Exit");
         System.out.print("Enter choice: ");
         int choice = scn.nextInt();
-        scn.next();
         if(choice == 1){
             System.out.print("Enter Pincode: ");
             String pinCode = scn.next();
             //print matching hospitals
             for(Hospital h: hospitals){
                 if(h.matchPincode(pinCode) == true){
-                    System.out.println(h.toString());
+                    System.out.println(h);
                 }
             }
+
         } else if(choice == 2){
             System.out.print("Enter Vaccine name: ");
             String vName = scn.next();
@@ -133,12 +135,35 @@ public class App {
         } else {
             return;
         }
-        System.out.print("Enter hospital ID: ");
-        int hID = scn.nextInt();
-        hID = hID - 100000;
+            System.out.print("Enter hospital ID: ");
+            int hID = scn.nextInt();
+            hID = hID - 100000;
+            //to reference the citizen getting vaccinated and the hospital choosen
+            Citizen cCurr = citizens.get(cID);
+            Hospital hCurr = hospitals.get(hID);
+            //slots available that the patient can take
+            boolean available = hCurr.printSlotsWithConditions(cCurr.getVaccineName(),cCurr.getDueDate(),cCurr.getDoses());
+            if(available == false) return;
+            else {
+                System.out.print("Choose Slot: ");
+                int slotIndex = scn.nextInt();
+                boolean success = hCurr.vaccinatePatient(cCurr,slotIndex);
+                if(success == true){
+                    System.out.println(cCurr.getName()+" has been vaccinated with "+cCurr.getVaccineName());
+                }
+            }
         
     }
-    public void slotsAvailableInHospital(){}
+    public void slotsAvailableInHospital(){
+        System.out.print("Enter Hospital ID:");
+        int hID = scn.nextInt();
+        hID = hID - 100000;
+        if((hID < 0) || (hID >= hospitals.size())){
+            System.out.println("Invalid Hospital ID entered");
+            return;
+        }
+        hospitals.get(hID).printAllSlots();
+    }
     public void vaccinationStatus(){
         System.out.print("Enter Patient ID: ");
         String id = scn.next();
@@ -149,7 +174,51 @@ public class App {
             System.out.println("Unregistered/Invalid ID");
         }
     }
+
+    public void printMenu(){
+        System.out.println("---------------------------");
+        System.out.println("1. Add Vaccine");
+        System.out.println("2. Register Hospital");
+        System.out.println("3. Register Citizen");
+        System.out.println("4. Add Slot for Vaccination");
+        System.out.println("5. Book SLot for Vaccination");
+        System.out.println("6. List all slots for a hospital");
+        System.out.println("7. Check Vaccination Status");
+        System.out.println("8. Exit");
+        System.out.println("---------------------------");
+    }
+    public void run(){
+        while(true){
+            int code = scn.nextInt();
+            if(code == 1){
+                this.addVaccine();
+            }
+            else if(code == 2){
+                this.registerHospital();
+            }
+            else if(code == 3){
+                this.registerCitizen();
+            }
+            else if(code == 4){
+                this.createSlots();
+            }
+            else if(code == 5){
+                this.bookSlot();
+            }
+            else if(code == 6){
+                this.slotsAvailableInHospital();
+            }
+            else if(code == 7){
+                this.vaccinationStatus();
+            } else {
+                break;
+            }
+        }
+    }
     public static void main(String[] args) throws Exception { 
+        App CoWin = new App();
+        System.out.println("CoWin Portal Initalized...");
+        CoWin.run();
 
         scn.close();
     }
