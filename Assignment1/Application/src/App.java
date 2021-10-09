@@ -113,6 +113,7 @@ public class App {
         System.out.println("3. Exit");
         System.out.print("Enter choice: ");
         int choice = scn.nextInt();
+        String vName = "";
         if(choice == 1){
             System.out.print("Enter Pincode: ");
             String pinCode = scn.next();
@@ -125,7 +126,7 @@ public class App {
 
         } else if(choice == 2){
             System.out.print("Enter Vaccine name: ");
-            String vName = scn.next();
+            vName = scn.next();
             //print matching hospitals
             for(Hospital h: hospitals){
                 if(h.availableVaccine(vName) == true){
@@ -143,7 +144,8 @@ public class App {
             Hospital hCurr = hospitals.get(hID);
             boolean available;
             if(cCurr.getDoses() == 0){
-                available = hCurr.printAllSlots();
+                if(choice == 1) available = hCurr.printAllSlots();
+                else available = hCurr.printSlotsWithConditions(vName, 0,0);
             } else {
                 //slots available that the patient can take
                 available = hCurr.printSlotsWithConditions(cCurr.getVaccineName(),cCurr.getDueDate(),cCurr.getDoses());
