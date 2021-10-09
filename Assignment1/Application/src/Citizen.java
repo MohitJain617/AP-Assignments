@@ -29,4 +29,7 @@ public class Citizen {
 		}
 	}
 	public void getVaccinated(){}
+	public String toString(){
+		return "Citizen name: " + name + ", Age:" + age + ", Unique ID: " + id;
+	}
 }

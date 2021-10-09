@@ -14,9 +14,29 @@ public class Hospital {
 	public boolean matchId(int id){
 		return (this.id == id);
 	}
+	public boolean matchPincode(String pinCode){
+		return pinCode.equals(this.pincode);
+	}
+	//getter for name
+	public String getName(){
+		return this.name;
+	}
+	//sees if any of the slots contains the vaccine
+	public boolean availableVaccine(String vname){
+		for(Slot s: slots){
+			if(s.matchVaccine(vname) == true) return true;
+		}
+		return false;
+	}
 	public void createSlot(int day_no, int quantity, Vaccine vaccine){
 		Slot s1 = new Slot(day_no, quantity, vaccine);
 		slots.add(s1);
 		//System.out.println();
+	}
+	public void printSlots(){
+		//
+	}
+	public String toString(){
+		return (id) + " " + this.name;
 	}
 }

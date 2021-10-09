@@ -37,9 +37,9 @@ public class App {
     }
     public void registerHospital(){
         //input
-        System.out.print("Hospital Name: ")
+        System.out.print("Hospital Name: ");
         String name = scn.next();
-        System.out.print("PinCode: ")
+        System.out.print("PinCode: ");
         String pincode = scn.next();
 
         int id = 100000+hospitals.size();
@@ -47,11 +47,11 @@ public class App {
         hospitals.add(h);
         System.out.println("Hospital Name: " + name + ", PinCode:" + pincode + ", Unique ID: " + id);
     }
-    public void registerCitizen(String name, int age, String uniqueId){
+    public void registerCitizen(){
         //input
-        System.out.print("Citizen Name: ")
+        System.out.print("Citizen Name: ");
         String name = scn.next();
-        System.out.print("Age: ")
+        System.out.print("Age: ");
         int age = scn.nextInt();
         scn.next(); //eat trailing new line
         System.out.print("Unique ID: ");
@@ -63,7 +63,7 @@ public class App {
         }
         Citizen c = new Citizen(name,age,uniqueId);
         citizens.put(uniqueId,c);
-        System.out.println("Citizen name: " + name + ", Age:" + age + ", Unique ID: " + uniqueId);
+        System.out.println(c);
     }
     public void createSlots(){
         System.out.print("Enter Hospital ID: ");
@@ -102,13 +102,45 @@ public class App {
         //inputs and prompts
         System.out.print("Enter patient Unique ID: ");
         String cID = scn.next(); //cID = citizen ID
+        if(citizens.containsKey(cID) == false) {
+            System.out.println("Invalid / Unregistered Unique ID Entered.");
+            return;
+        }
         System.out.println("1. Search by area");
         System.out.println("2. Search by Vaccine");
         System.out.println("3. Exit");
+        System.out.print("Enter choice: ");
+        int choice = scn.nextInt();
+        scn.next();
+        if(choice == 1){
+            System.out.print("Enter Pincode: ");
+            String pinCode = scn.next();
+            //print matching hospitals
+            for(Hospital h: hospitals){
+                if(h.matchPincode(pinCode) == true){
+                    System.out.println(h.toString());
+                }
+            }
+        } else if(choice == 2){
+            System.out.print("Enter Vaccine name: ");
+            String vName = scn.next();
+            //print matching hospitals
+            for(Hospital h: hospitals){
+                if(h.availableVaccine(vName) == true){
+                    System.out.println(h);
+                }
+            }
+        } else {
+            return;
+        }
+        System.out.print("Enter hospital ID: ");
+        int hID = scn.nextInt();
+        hID = hID - 100000;
+        
     }
     public void slotsAvailableInHospital(){}
     public void vaccinationStatus(){
-        System.out.print("Enter Patient ID: ")
+        System.out.print("Enter Patient ID: ");
         String id = scn.next();
         if(citizens.containsKey(id) == true){
             Citizen c = citizens.get(id);
