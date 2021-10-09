@@ -49,7 +49,8 @@ public class App {
     public void registerCitizen(){
         //input
         System.out.print("Citizen Name: ");
-        String name = scn.next();
+        scn.nextLine();
+        String name = scn.nextLine();
         System.out.print("Age: ");
         int age = scn.nextInt();
         if(age < 18){
