@@ -10,6 +10,9 @@ public class Slot {
 	public int getDay(){
 		return this.day_no;
 	}
+	public Vaccine getVaccine(){
+		return this.vaccine;
+	}
 
 	public boolean matchVaccine(String vname){
 		return this.vaccine.isEqual(vname);

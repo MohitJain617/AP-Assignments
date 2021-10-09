@@ -29,12 +29,19 @@ public class Hospital {
 		slots.add(s1);
 		//System.out.println();
 	}
-	public void printAllSlots(){
+	public boolean printAllSlots(){
+		boolean check = false;
 		int i = 0;
 		for(Slot s: slots){
 			System.out.println(i+"->"+s);
 			i++;
+			check = true;
 		}
+		if(check == false){
+			System.out.println("No Slots available");
+			return false;
+		}
+		else return true;
 	}
 	//true if slots available, false if not
 	public boolean printSlotsWithConditions(String vname, int dueDate, int doses){
@@ -59,7 +66,8 @@ public class Hospital {
 			return false;
 		}
 		int val = slots.get(slotIndex).useVaccine();
-		c.getVaccinated(slots.get(slotIndex).getDay());
+		Vaccine vac = slots.get(slotIndex).getVaccine();
+		c.getVaccinated(slots.get(slotIndex).getDay(), vac);
 		if(val == 0){
 			slots.remove(slotIndex);
 		}

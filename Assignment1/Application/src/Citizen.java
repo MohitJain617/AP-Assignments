@@ -42,9 +42,10 @@ public class Citizen {
 			System.out.println("Number of doses given: " + this.doses);
 		}
 	}
-	public void getVaccinated(int date){
+	public void getVaccinated(int date, Vaccine v){
 		doses++;
-		dueDate = date+vaccine.getGap();
+		this.vaccine = v;
+		dueDate = date+this.vaccine.getGap();
 	}
 	public String toString(){
 		return "Citizen name: " + name + ", Age:" + age + ", Unique ID: " + id;

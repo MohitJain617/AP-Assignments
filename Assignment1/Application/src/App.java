@@ -32,7 +32,7 @@ public class App {
         }
         Vaccine v1 = new Vaccine(name,doses,gap);
         vaccines.add(v1);
-        System.out.println("Vaccine name: " + name + ", Number of doses: " + doses + ", Gap between doses: " + doses);
+        System.out.println("Vaccine name: " + name + ", Number of doses: " + doses + ", Gap between doses: " + gap);
     }
     public void registerHospital(){
         //input
@@ -94,7 +94,7 @@ public class App {
                     hospitals.get(hID).createSlot(day_no,quantity,vaccines.get(index));
                     //printing output
                     System.out.println("Slot added by Hospital " + (100000+hID) + 
-                    "for Day: " + day_no + ", Available Quantity: " + quantity + " of Vaccine "
+                    " for Day: " + day_no + ", Available Quantity: " + quantity + " of Vaccine "
                     + vaccines.get(index).getName());
                 }
             }
@@ -141,8 +141,13 @@ public class App {
             //to reference the citizen getting vaccinated and the hospital choosen
             Citizen cCurr = citizens.get(cID);
             Hospital hCurr = hospitals.get(hID);
-            //slots available that the patient can take
-            boolean available = hCurr.printSlotsWithConditions(cCurr.getVaccineName(),cCurr.getDueDate(),cCurr.getDoses());
+            boolean available;
+            if(cCurr.getDoses() == 0){
+                available = hCurr.printAllSlots();
+            } else {
+                //slots available that the patient can take
+                available = hCurr.printSlotsWithConditions(cCurr.getVaccineName(),cCurr.getDueDate(),cCurr.getDoses());
+            }
             if(available == false) return;
             else {
                 System.out.print("Choose Slot: ");
@@ -189,6 +194,7 @@ public class App {
     }
     public void run(){
         while(true){
+            this.printMenu();
             int code = scn.nextInt();
             if(code == 1){
                 this.addVaccine();
