@@ -11,4 +11,7 @@ public class Vaccine {
 	public boolean isEqual(String name){
 		return name.equals(this.name);
 	}
+	public int getDoses(){return this.doses;}
+	public int getGap(){return this.gap;}
+	public int getName(){return this.name;}
 }

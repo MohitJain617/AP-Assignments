@@ -7,4 +7,5 @@ public class Slot {
 		this.quantity = quantity;
 		this.vaccine = vaccine;
 	}
+	
 }

@@ -3,8 +3,8 @@ public class Citizen {
 	private int age;
 	private String id;
 	private Vaccine vaccine;
-	private int doses;
-	private int dueDate;
+	private int doses; //doses taken
+	private int dueDate; //due date to take next dose
 	
 	public Citizen(String name, int age, String id){
 		this.name = name;
@@ -13,6 +13,20 @@ public class Citizen {
 		vaccine = null;
 		doses = 0;
 		dueDate = 0;
+	}
+	public void printStatus(){
+		if(doses == 0){
+			System.out.println("Registered");
+		} else if((vaccine != null) && (doses < vaccine.getDoses())){
+			System.out.println("Partially Vaccinated");
+			System.out.println("Vaccine taken: " + vaccine.getName());
+			System.out.println("Number of doses given: " + this.doses);
+			System.out.println("Next due date: " + this.dueDate);
+		} else {
+			System.out.println("Fully Vaccinated");
+			System.out.println("Vaccine taken: " + vaccine.getName());
+			System.out.println("Number of doses given: " + this.doses);
+		}
 	}
 	public void getVaccinated(){}
 }
