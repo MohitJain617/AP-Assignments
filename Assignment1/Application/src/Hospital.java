@@ -52,6 +52,7 @@ public class Hospital {
 				System.out.println(i+"->"+s);
 				check = true;
 			}
+			i++;
 		}
 		if(check == false){
 			System.out.println("No Slots available");
@@ -61,7 +62,8 @@ public class Hospital {
 	}
 
 	public boolean vaccinatePatient(Citizen c, int slotIndex){
-		if((slotIndex < 0) || (slotIndex >= slots.size())){
+		if((slotIndex < 0) || (slotIndex >= slots.size()) || 
+		(slots.get(slotIndex).matchPatientNeeds(c.getVaccineName(),c.getDueDate(),c.getDoses()))){
 			System.out.println("Invalid slot entered");
 			return false;
 		}
