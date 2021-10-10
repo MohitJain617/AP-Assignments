@@ -62,8 +62,7 @@ public class Hospital {
 	}
 
 	public boolean vaccinatePatient(Citizen c, int slotIndex){
-		if((slotIndex < 0) || (slotIndex >= slots.size()) || 
-		(slots.get(slotIndex).matchPatientNeeds(c.getVaccineName(),c.getDueDate(),c.getDoses()))){
+		if((slotIndex < 0) || (slotIndex >= slots.size()) || (slots.get(slotIndex).getDay() < c.getDueDate())){
 			System.out.println("Invalid slot entered");
 			return false;
 		}
