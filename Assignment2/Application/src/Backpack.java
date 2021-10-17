@@ -13,6 +13,7 @@ public class Backpack {
             return false;
         }
     }
+
     public Backpack(){
         data = new Data();
     }
@@ -62,8 +63,8 @@ public class Backpack {
                         slides.add(temp);
                     }
 
-                    LectureMaterial ltemp = new LectureSlide(topic,n,slides,"date",t.getName());  //polymorphism
-                    data.uploadLecture(ltemp);
+                    LectureMaterial ltemp = new LectureSlide(topic,n,slides,"date",t);  //polymorphism
+                    data.addMaterial(ltemp,t);
                 } else if(choice == 2){
                     //lecture video
                     System.out.print("Enter topic of video: ");
@@ -73,16 +74,56 @@ public class Backpack {
                     //check if valid filename
                     boolean ok = validFile(filename,".mp4");
                     if(ok == true){
-                        LectureMaterial ltemp = new LectureVideo(topic,filename,"date",t.getName());
-                        data.uploadLecture(ltemp);
+                        LectureMaterial ltemp = new LectureVideo(topic,filename,"date",t);
+                        data.addMaterial(ltemp,t);
                     } else {
                         System.out.println("Invalid file format,");
                         System.out.println("Please repeat the steps with valid file format to upload successfully.");
                         continue;
                     }
                 } else {
-                    //
+                    System.out.println("Invalid option selected");
                 }
+            } else if(option == 2){
+                //Add assessments
+                System.out.println("1. Add Assignment");
+                System.out.println("2. Add Quiz");
+                int choice = scn.nextInt();
+                scn.nextLine(); //eat trailing newline
+                if(choice == 1){
+                    System.out.print("Enter problem statement: ");
+                    String problem = scn.nextLine();
+                    System.out.print("Enter max marks: ");
+                    int maxmarks = scn.nextInt();
+                    scn.nextLine();  //trailing newline
+                    Assessment atemp = new Assignment(problem,maxmarks);
+                    data.addAssessment(atemp,t);
+                } else if(choice == 2){
+                    System.out.print("Enter quiz question: ");
+                    String question = scn.nextLine();
+                    Assessment qtemp = new Quiz(question);
+                    data.addAssessment(qtemp,t);
+                } else {
+                    System.out.println("Invalid Choice entered.");
+                }
+            } else if(option == 3){
+                data.viewMaterial();
+            } else if(option == 4){
+                data.viewAssessments();
+            } else if(option == 5){
+                System.out.println("List of Assessments");
+                data.viewAssessments();
+                System.out.print("Enter ID of assessment to view submissions: ");
+                int aid = scn.nextInt(); //assessment id
+                scn.nextLine(); //eat trailing newline
+                this.data.viewUngradedSubmissions(t,aid);
+                int sid = scn.nextInt(); //submission id
+                Submission sub = data.getSubmission(t,aid,sid);
+
+            } else if(option == 6){
+            } else if(option == 7){
+            } else if(option == 8){
+            } else if(option == 9){
             }
         }
     }
