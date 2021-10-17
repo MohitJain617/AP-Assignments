@@ -5,4 +5,5 @@ public interface Assessment {
 	public void close(Teacher t);
 	public void submit(Student s, String solution);
 	public void viewSubmissions(Teacher t);
+	public int getMaxMarks();
 }

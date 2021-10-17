@@ -62,8 +62,8 @@ public class Backpack {
                         String temp = scn.nextLine();
                         slides.add(temp);
                     }
-
-                    LectureMaterial ltemp = new LectureSlide(topic,n,slides,"date",t);  //polymorphism
+                    Date date = new Date();
+                    LectureMaterial ltemp = new LectureSlide(topic,n,slides,date.toString(),t);  //polymorphism
                     data.addMaterial(ltemp,t);
                 } else if(choice == 2){
                     //lecture video
@@ -73,8 +73,9 @@ public class Backpack {
                     String filename = scn.next();
                     //check if valid filename
                     boolean ok = validFile(filename,".mp4");
+                    Date date = new Date();
                     if(ok == true){
-                        LectureMaterial ltemp = new LectureVideo(topic,filename,"date",t);
+                        LectureMaterial ltemp = new LectureVideo(topic,filename,date.toString(),t);
                         data.addMaterial(ltemp,t);
                     } else {
                         System.out.println("Invalid file format,");
@@ -119,11 +120,28 @@ public class Backpack {
                 this.data.viewUngradedSubmissions(t,aid);
                 int sid = scn.nextInt(); //submission id
                 Submission sub = data.getSubmission(t,aid,sid);
-
+                System.out.println("Submission: "+sub.getSolution());
+                System.out.println("----------------------");
+                System.out.println("Max Marks: "+sub.getMaxMarks());
+                System.out.print("Marks Scored: ");
+                int marks = scn.nextInt();
+                scn.nextLine();
+                sub.grading(t,marks);
             } else if(option == 6){
+                data.viewOpenAssessments(t);
+                System.out.print("Enter id of assessment to close: ");
+                int idx = scn.nextInt();
+                scn.nextLine();
+                data.closeAssessments(t,idx);
             } else if(option == 7){
+                data.viewComments();
             } else if(option == 8){
+                System.out.print("Enter Comment: ");
+                String cmt = scn.nextLine();
+                Date d = new Date();
+                data.addComment(cmt,t.getName(),d.toString());
             } else if(option == 9){
+                break;
             }
         }
     }

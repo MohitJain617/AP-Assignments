@@ -54,6 +54,10 @@ public class Assignment implements Assessment{
 		}
 		return ungrads;
 	}
+	@Override
+	public int getMaxMarks(){
+		return this.maxmarks;
+	}
 	
 	@Override
 	public String toString(){

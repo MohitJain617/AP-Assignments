@@ -13,19 +13,4 @@ public class Teacher {
 	public String getName(){
 		return this.name;
 	}
-	public void uploadLectureSlides(){
-		//
-	}
-	public void uploadLectureVideos(){
-		//
-	}
-	public void viewLectureMaterial(){
-		//
-	}
-	public void viewAssessments(){
-		//
-	}
-	public void gradeAssessments(){
-		//
-	}
 }

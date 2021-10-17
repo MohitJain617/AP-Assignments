@@ -3,11 +3,13 @@ public class Quiz implements Assessment {
 	private boolean close;
 	private String question;
 	private ArrayList<Submission> submissions;
+	private int maxmarks;
 	
 	public Quiz(String question){
 		this.question = question;
 		close = false;
 		submissions = new ArrayList<Submission>();
+		this.maxmarks = 1;
 	}
 	@Override
 	public String view(){
@@ -40,6 +42,13 @@ public class Quiz implements Assessment {
 			System.out.println(i+". "+subs.get(i).getName());
 		}
 	}
+
+	@Override
+	public int getMaxMarks(){
+		return this.maxmarks;
+	}
+
+
 	private ArrayList<Submission> ungradedSubmissions(){
 		ArrayList<Submission> ungrads = new ArrayList<Submission>();
 		int len = submissions.size();

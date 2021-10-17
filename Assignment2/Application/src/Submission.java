@@ -25,5 +25,11 @@ public class Submission {
 	public String getName(){
 		return this.student.getName();
 	}
+	public int getMaxMarks(){
+		return assessment.getMaxMarks();
+	}
+	public String getSolution(){
+		return this.solution;
+	}
 
 }
