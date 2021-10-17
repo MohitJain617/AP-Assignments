@@ -1,3 +1,3 @@
-public class Assignment {
+public class Assignment implements Assessment{
 	
 }
