@@ -64,8 +64,9 @@ public class Backpack {
         }
         System.out.print("Choose id: ");
         int tid = scn.nextInt(); //teachers id
-        if(tid < teachers.size()){
+        if(tid >= teachers.size()){
             System.out.println("Invalid id selected");
+            return;
         }
         Teacher t = teachers.get(tid);
         int option;      //option choosen for operation
@@ -208,7 +209,7 @@ public class Backpack {
         }
         System.out.print("Choose id: ");
         int sid = scn.nextInt(); //Student id
-        if(sid < students.size()){
+        if(sid >= students.size()){
             System.out.println("Invalid id selected");
         }
         Student s = students.get(sid);

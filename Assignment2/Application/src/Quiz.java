@@ -27,7 +27,9 @@ public class Quiz implements Assessment {
 	}
 	@Override
 	public void submit(Student s, String solution){
-		//
+		Submission stemp = new Submission(s,this,solution);
+		s.submit(stemp);
+		submissions.add(stemp);
 	}
 	@Override
 	public boolean isClosed(){

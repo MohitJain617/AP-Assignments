@@ -19,8 +19,9 @@ public class LectureSlide implements LectureMaterial{
 	public void view(){
 		System.out.println("Title: "+this.topic);
 		int len = slides.size();
+		System.out.println("Number of slides: "+len);
 		for(int i = 1; i <= len; i++){
-			System.out.println("Slide "+i+" "+this.slides.get(i-1));
+			System.out.println("Slide: "+i+" "+this.slides.get(i-1));
 		}
 		System.out.println("Date of upload: "+this.date);
 		System.out.println("Uploaded by: "+this.uploadedBy);
