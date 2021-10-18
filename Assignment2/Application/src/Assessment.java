@@ -4,6 +4,8 @@ public interface Assessment {
 	public boolean isClosed();
 	public void close(Teacher t);
 	public void submit(Student s, String solution);
-	public void viewSubmissions(Teacher t);
+	public boolean viewSubmissions(Teacher t);
+	public boolean markedAsDone(Student s);
 	public int getMaxMarks();
+	public boolean quizType();
 }

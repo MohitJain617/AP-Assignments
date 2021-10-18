@@ -24,21 +24,25 @@ public class Data {
 		if(t != null)
 			assessments.add(a);
 	}
-	public void viewAssessments(){
+	public boolean viewAssessments(){
 		int len = assessments.size();
 		for(int i = 0;i < len; i++){
 			System.out.println("ID: "+i+" "+assessments.get(i).view());
 			System.out.println("----------------");
 		}
+		if(len == 0) return false;
+		return true;
 	}
-	public void viewUngradedSubmissions(Teacher t,int index){
-		assessments.get(index).viewSubmissions(t);
+	public boolean viewUngradedSubmissions(Teacher t,int index){
+		return assessments.get(index).viewSubmissions(t);
 	}
-	public void viewOpenAssessments(Teacher t){
+	public boolean viewOpenAssessments(Teacher t){
 		ArrayList<Assessment> oa = openAssessments();
 		for(int i = 0; i < oa.size(); i++){
 			System.out.println("ID: "+i+" "+oa.get(i).view());
 		}
+		if(oa.size() == 0) return false;
+		return true;
 	}
 	public void closeAssessments(Teacher t, int index){
 		ArrayList<Assessment> oa = openAssessments();
@@ -57,7 +61,33 @@ public class Data {
 			System.out.println();
 		}
 	}
-
+	public boolean viewPendingAssessments(Student s){
+		ArrayList<Assessment> arr = pendingAssessments(s);
+		for(int i = 0; i < arr.size(); i++){
+			System.out.println("ID: "+i + " " + arr.get(i).view());
+		}
+		if(arr.size() == 0) return false;
+		return true;
+	}
+	public boolean pendingAssessmentType(Student s, int id){
+		ArrayList<Assessment> arr = pendingAssessments(s);
+		return arr.get(id).quizType();
+	}
+	public void submitAssessment(Student s, int id, String solution){
+		ArrayList<Assessment> arr = pendingAssessments(s);
+		arr.get(id).submit(s,solution);
+	}
+	
+	private ArrayList<Assessment> pendingAssessments(Student s){
+		ArrayList<Assessment> arr = new ArrayList<Assessment>();
+		for(Assessment assess: assessments){
+			//neither marked as done nor closed
+			if((assess.markedAsDone(s) == false) && (assess.isClosed() == false)){
+				arr.add(assess);
+			}
+		}
+		return arr;
+	}
 	private ArrayList<Assessment> openAssessments(){
 		ArrayList<Assessment> openass = new ArrayList<Assessment>();
 		int len = assessments.size();

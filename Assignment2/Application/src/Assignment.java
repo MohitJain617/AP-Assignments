@@ -29,6 +29,7 @@ public class Assignment implements Assessment{
 	@Override
 	public void submit(Student s, String solution){
 		Submission stemp = new Submission(s,this,solution);
+		s.submit(stemp);
 		submissions.add(stemp);
 	}
 	@Override
@@ -36,13 +37,15 @@ public class Assignment implements Assessment{
 		return this.close;
 	}
 	@Override
-	public void viewSubmissions(Teacher t){
+	public boolean viewSubmissions(Teacher t){
 		//to view all the ungraded submissions
 		ArrayList<Submission> subs = ungradedSubmissions();
 		int len = subs.size();
 		for(int i = 0; i < len; i++){
 			System.out.println(i+". "+subs.get(i).getName());
 		}
+		if(len == 0) return false;
+		return true;
 	}
 	private ArrayList<Submission> ungradedSubmissions(){
 		ArrayList<Submission> ungrads = new ArrayList<Submission>();
@@ -58,7 +61,20 @@ public class Assignment implements Assessment{
 	public int getMaxMarks(){
 		return this.maxmarks;
 	}
-	
+	@Override
+	public boolean markedAsDone(Student s){
+		for(Submission sbm: submissions){
+			if(sbm.getId() == s.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
+	@Override
+	public boolean quizType(){
+		return false;
+	}
+
 	@Override
 	public String toString(){
 		return "Assignment: " + this.problem + " Max Marks: "+this.maxmarks;

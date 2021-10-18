@@ -25,11 +25,24 @@ public class Submission {
 	public String getName(){
 		return this.student.getName();
 	}
+	public int getId(){
+		return this.student.getId();
+	}
 	public int getMaxMarks(){
 		return assessment.getMaxMarks();
 	}
 	public String getSolution(){
 		return this.solution;
 	}
-
+	public void gradeinfo(){
+		if(graded == false){
+			System.out.println("Submission: "+this.solution);
+			System.out.println();
+		} else {
+			System.out.println("Submission: "+this.solution);
+			System.out.println("Marks scored: " + this.marks);
+			System.out.println("Graded by: "+this.gradedBy);
+			System.out.println();
+		}
+	}
 }

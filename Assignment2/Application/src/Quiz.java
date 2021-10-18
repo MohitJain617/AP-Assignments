@@ -34,18 +34,33 @@ public class Quiz implements Assessment {
 		return this.close;
 	}
 	@Override
-	public void viewSubmissions(Teacher t){
+	public boolean viewSubmissions(Teacher t){
 		//to view all the ungraded submissions
 		ArrayList<Submission> subs = ungradedSubmissions();
 		int len = subs.size();
 		for(int i = 0; i < len; i++){
 			System.out.println(i+". "+subs.get(i).getName());
 		}
+		if(len == 0) return false;
+		return true;
 	}
 
 	@Override
 	public int getMaxMarks(){
 		return this.maxmarks;
+	}
+	@Override
+	public boolean markedAsDone(Student s){
+		for(Submission sbm: submissions){
+			if(sbm.getId() == s.getId()){
+				return true;
+			}
+		}
+		return false;
+	}
+	@Override
+	public boolean quizType(){
+		return true;
 	}
 
 
