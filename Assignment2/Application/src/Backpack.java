@@ -16,6 +16,8 @@ public class Backpack {
 
     public Backpack(){
         data = new Data();
+        students = new ArrayList<Student>();
+        teachers = new ArrayList<Teacher>();
     }
     public void MainMenu(){
         Teacher t1 = new Teacher("I0",this.data);
@@ -71,6 +73,7 @@ public class Backpack {
             System.out.println("Welcome "+t.getName());
             printInstructorMenu();
             option = scn.nextInt();
+            scn.nextLine();   //eating trailing newline
             if(option == 1){
                 //add lecture materials
                 System.out.println("1. Add Lecture Slides");
@@ -214,6 +217,7 @@ public class Backpack {
             System.out.println("Welcome "+s.getName());
             printStudentMenu();
             option = scn.nextInt();
+            scn.nextLine();  //eat trailing newline
             if(option == 1){
                 data.viewMaterial();
             } else if(option == 2){
@@ -260,7 +264,8 @@ public class Backpack {
 
     }
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        Backpack b = new Backpack();
+        b.MainMenu();
         scn.close();
     }
 }

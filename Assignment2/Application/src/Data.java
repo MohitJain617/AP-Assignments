@@ -8,6 +8,7 @@ public class Data {
 	public Data(){
 		material = new ArrayList<LectureMaterial>();
 		assessments = new ArrayList<Assessment>();
+		comments = new ArrayList<Comment>();
 	}
 	//teacher t passed as parameter to ensure that t is a teacher
 	public void addMaterial(LectureMaterial l, Teacher t){
