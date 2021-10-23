@@ -31,14 +31,34 @@ public class Game {
         gamePoints = 0;
         
         //initializing Player
-        System.out.println("Enter Player name: ");
+        System.out.println("Enter Player name and hit enter: ");
         String sname = scn.nextLine();
         p1 = new Player(sname);
 
     }
 
     public void startGame(){
-        //
+        System.out.println("The game setup is ready");
+        System.out.println("---------------------------------");
+        while(rollDie() != 1){
+            System.out.println("Game cannot start until you get 1");
+        }
+        p1.updatePos(1);
+        updateStats();
+
+        while(p1.getPos() != 13){
+            int dval = rollDie();
+            if(dval + p1.getPos() > 13){
+                System.out.println("Player cannot move");
+            } else {
+                p1.updatePos(dval);
+                updateStats();
+            }
+        }
+        System.out.println("Game over");
+        System.out.println(p1.getName()+" accumulated "+gamePoints +" points");
+        System.out.println("------------------------------------");
+
     }
 
     public void updateStats(){
@@ -47,7 +67,7 @@ public class Game {
         int off = currf.getOffset(); //offset
         this.gamePoints += currf.getPoints(); //update points
 
-        System.out.println("Player position Floor-"+pos);
+        p1.printPosition();
         System.out.println(p1.getName() + " has reached "+currf);
         System.out.println("Total points "+gamePoints);
 
@@ -58,8 +78,17 @@ public class Game {
             updateStats();
         }
     }
+    private int rollDie(){
+        System.out.print("Hit enter to roll die:");
+        scn.nextLine();
+        int d = die.roll();
+        System.out.println("Dice gave "+d);
+        return d;
+    }
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        Game game = new Game();
+        game.startGame();
+        scn.close();
     }
 }

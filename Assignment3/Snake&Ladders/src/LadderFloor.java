@@ -5,18 +5,6 @@ public class LadderFloor extends Floor {
 	}
 	@Override
 	public String toString(){
-		return "an Empty Floor";
+		return "a Ladder Floor";
 	}
-}
-
-class Elevator extends Floor{
-
-	public Elevator(int loc){
-		super(4,8,loc);
-	}
-	@Override
-	public String toString(){
-		return "an Empty Floor";
-	}
-
 }

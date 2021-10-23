@@ -8,14 +8,3 @@ public class SnakeFloor extends Floor{
 		return "Normal Snake Floor";
 	}
 }
-
-class KingCobra extends Floor{
-
-	public KingCobra(int loc){
-		super(-4,-8,loc);
-	}
-	@Override
-	public String toString(){
-		return "King Cobra";
-	}
-}

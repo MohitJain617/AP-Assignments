@@ -15,4 +15,7 @@ public class Player {
 	public void updatePos(int offset){
 		this.pos += offset;
 	}
+	public void printPosition(){
+		System.out.println("Player position Floor-"+this.pos);
+	}
 }

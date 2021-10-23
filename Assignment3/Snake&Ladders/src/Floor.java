@@ -1,7 +1,7 @@
 public class Floor {
 	private int points;
 	private int offset;
-	private int location;
+	private int location;  //every floor knows it location
 
 	public Floor(int loc){
 		points = 1;
@@ -18,6 +18,9 @@ public class Floor {
 	}
 	public int getOffset(){
 		return this.offset;
+	}
+	public int getLocation(){
+		return this.location;
 	}
 	@Override
 	public String toString(){
