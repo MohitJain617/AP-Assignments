@@ -1,7 +1,15 @@
-public class Elevator extends Floor{
+public class Elevator extends LadderFloor{
 
 	public Elevator(int loc){
-		super(4,8,loc);
+		super(loc);
+	}
+	@Override
+	public int getPoints(){
+		return super.getPoints()+2;
+	}
+	@Override
+	public int getOffset(){
+		return super.getOffset()+4;
 	}
 	@Override
 	public String toString(){

@@ -45,14 +45,17 @@ public class Game {
         }
         p1.updatePos(1);
         updateStats();
+        System.out.println();
 
         while(p1.getPos() != 13){
             int dval = rollDie();
             if(dval + p1.getPos() > 13){
                 System.out.println("Player cannot move");
+                System.out.println();
             } else {
                 p1.updatePos(dval);
                 updateStats();
+                System.out.println();
             }
         }
         System.out.println("Game over");
