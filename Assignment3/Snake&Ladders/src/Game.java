@@ -5,8 +5,9 @@ public class Game {
     private Player p1;
     private int gamePoints;
     private Dice die;
+    private ArrayList<String> history;
 
-    public Game(){
+    public Game(ArrayList<String> history){
         //initializing floor
         floors = new ArrayList<Floor>();
         for(int i = 0; i < 14; i++){floors.add(null);}
@@ -35,6 +36,9 @@ public class Game {
         String sname = scn.nextLine();
         p1 = new Player(sname);
 
+
+        this.history = history;    //association relation with history
+
     }
 
     public void startGame(){
@@ -59,6 +63,7 @@ public class Game {
             }
         }
         System.out.println("Game over");
+        history.add(p1.getName()+" accumulated "+gamePoints +" points");
         System.out.println(p1.getName()+" accumulated "+gamePoints +" points");
         System.out.println("------------------------------------");
 
@@ -90,8 +95,31 @@ public class Game {
     }
 
     public static void main(String[] args) throws Exception {
-        Game game = new Game();
-        game.startGame();
+        ArrayList<String> history = new ArrayList<String>();
+        while(true){
+            System.out.println("1 Start Game");
+            System.out.println("2 Show History");
+            System.out.println("3 Exit");
+            int i = scn.nextInt();
+            scn.nextLine();
+            if(i == 1){
+                Game game = new Game(history);
+                game.startGame();
+                
+            } else if(i == 2){
+                System.out.println("------------");
+                if(history.size() == 0){
+                    System.out.println("Empty");
+                } else {
+                    for(String s: history){
+                        System.out.println(s);
+                    }
+                }
+                System.out.println("------------");
+            }else {
+                break;
+            }
+        }
         scn.close();
     }
 }
