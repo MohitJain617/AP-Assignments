@@ -12,7 +12,7 @@ public class Calculator <T>{
             throw new InvalidCalculatorException();
         }
     }
-    public void Update(T arg1, T arg2){
+    public void update(T arg1, T arg2){
         if((arg1 == null) || (arg2 == null)) throw new NullPointerException();
         this.arg1 = arg1;
         this.arg2 = arg2;

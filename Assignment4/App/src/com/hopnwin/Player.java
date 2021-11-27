@@ -8,6 +8,7 @@ public class Player {
         bucket = new ArrayList<SoftToy>();
     }
     public void addToy(SoftToy st){
+        if(st == null) throw new NullPointerException();
         bucket.add(st);
     }
     public void printSoftToys(){
