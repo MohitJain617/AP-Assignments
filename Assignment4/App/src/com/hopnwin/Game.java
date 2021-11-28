@@ -24,8 +24,8 @@ public class Game {
         for(int i = 0; i < 5; i++){
             System.out.print("Hit enter for your "+(i+1)+num[i]+" hop.");
             scn.nextLine();
-            int v = randomIntGenerator(0,21);
-            if(v == 20){
+            int v = randomIntGenerator(0,23);
+            if(v >= 20){
                 System.out.println("You are too energetic and zoomed past all the tiles. Muddy Puddle Splash!");
             } else if((v+1) % 2 != 0){
                 System.out.println("You landed on tile "+(v+1));
@@ -51,13 +51,13 @@ public class Game {
                     int val = takeIntegerInput();
                     if(intCalc.checkAnswer(val)){
                         //correct
-                        System.out.println("Correct Answer");
-                        SoftToy x = carpet.getToyAt(v);
                         try {
+                            System.out.println("Correct Answer");
+                            SoftToy x = carpet.getToyAt(v);
                             player.addToy(x);
                             System.out.println("You won a " + x + " soft toy");
                         }
-                        catch (NullPointerException e) { e.printStackTrace();}
+                        catch (ArithmeticException | NullPointerException | IndexOutOfBoundsException e) { e.printStackTrace();}
                     } else {
                         //incorrect
                         System.out.println("Incorrect Answer");

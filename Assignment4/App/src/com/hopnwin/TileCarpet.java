@@ -3,7 +3,7 @@ package com.hopnwin;
 import java.util.ArrayList;
 
 public class TileCarpet {
-    private ArrayList<SoftToy> tiles;
+    private final ArrayList<SoftToy> tiles;
     public TileCarpet(){
         tiles = new ArrayList<SoftToy>();
         String[] toys = {"Tom","Jerry","Mickey Mouse","Thanos",
@@ -19,7 +19,11 @@ public class TileCarpet {
         //Clone and return toy at an index
         SoftToy st = null;
         try{
-            st = tiles.get(index).clone();
+            try {
+                st = tiles.get(index).clone();
+            } catch(IndexOutOfBoundsException e) {
+                System.out.println("Muddy Puddle Splash Condition Should have been executed");
+            }
         } catch (CloneNotSupportedException e){
             //this shouldn't occur
             e.printStackTrace();
