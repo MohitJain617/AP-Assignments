@@ -3,7 +3,7 @@ package com.hopnwin;
 import java.util.ArrayList;
 
 public class Player {
-    private ArrayList<SoftToy> bucket;
+    private final ArrayList<SoftToy> bucket;
     public Player(){
         bucket = new ArrayList<SoftToy>();
     }

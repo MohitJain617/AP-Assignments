@@ -102,6 +102,7 @@ public class Game {
         }
         System.out.println("Game Over");
         System.out.println("Soft toys won by you are:");
+        scn.close();
         player.printSoftToys();
     }
     private int takeIntegerInput(){
@@ -113,7 +114,6 @@ public class Game {
                 Scanner scint = new Scanner(System.in);
                 inp = scint.nextInt();
                 done = true;
-                scint.close();
             } catch (InputMismatchException e){
                 System.out.println("Invalid input, Try again");
             }
